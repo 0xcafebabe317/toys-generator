@@ -11,7 +11,7 @@ import java.io.IOException;
  * @date: 2023年11月22 13:40
  **/
 public class MainGenerator {
-    public static void main(String[] args) throws TemplateException, IOException {
+    public static void doGenerate(Object object) throws TemplateException, IOException {
         // 1、静态文件生成
         String projectPath = System.getProperty("user.dir");
         // 输入路径
@@ -24,12 +24,7 @@ public class MainGenerator {
         String dynamicInputPath = projectPath + File.separator+ "toys-generator-basic" + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
         String dynamicOutputPath = projectPath + File.separator + "acm-template/src/com/toys/acm/MainTemplate.java";
 
-        // 数据模型
-        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-        mainTemplateConfig.setAuthor("toys");
-        mainTemplateConfig.setOutputText("输出结果为:");
-        mainTemplateConfig.setLoop(false);
+        DynamicGenerator.doGenerator(dynamicInputPath,dynamicOutputPath,object);
 
-        DynamicGenerator.doGenerator(dynamicInputPath,dynamicOutputPath,mainTemplateConfig);
     }
 }
