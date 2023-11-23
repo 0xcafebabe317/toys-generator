@@ -15,7 +15,7 @@ public class ListCommand implements Runnable {
 
     @Override
     public void run() {
-        String projectPath = System.getProperty("user.dir") + File.separator + "toys-generator-basic";
+        String projectPath = System.getProperty("user.dir");
         // 整个项目根路径
         File parentFile = new File(projectPath).getParentFile();
         // 输入路径

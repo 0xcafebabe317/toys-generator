@@ -21,19 +21,19 @@ public class GenerateCommand implements Callable<Integer> {
     /**
      * 作者
      */
-    @Option(names = {"-a", "--author"}, description = "作者名称:", arity = "0..1", interactive = true)
+    @Option(names = {"-a", "--author"}, description = "作者名称:", arity = "0..1", interactive = true, echo = true)
     private String author = "toys";
 
     /**
      * 输出描述
      */
-    @Option(names = {"-o", "--outputText"}, description = "输出文本:", arity = "0..1", interactive = true)
+    @Option(names = {"-o", "--outputText"}, description = "输出文本:", arity = "0..1", interactive = true, echo = true)
     private String outputText = "输出结果：";
 
     /**
      * 是否循环（开关）
      */
-    @Option(names = {"-l", "--loop"}, description = "是否循环:", arity = "0..1", interactive = true)
+    @Option(names = {"-l", "--loop"}, description = "是否循环:", arity = "0..1", interactive = true, echo = true)
     private boolean loop = false;
 
     @Override
