@@ -1,6 +1,6 @@
 package com.toys.generator;
 
-import com.toys.model.MainTemplateConfig;
+import cn.hutool.core.io.FileUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -10,22 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-/**
- * @author: Toys
- * @date: 2023年11月22 13:12
- **/
 public class DynamicGenerator {
-    public static void main(String[] args) throws IOException, TemplateException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "toys-generator-basic";
-        String inputPath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
-        String outputPath = projectPath + File.separator + "MainTemplate.java";
-
-        // 数据模型
-        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-
-        // 生成
-        doGenerator(inputPath,outputPath,mainTemplateConfig);
-    }
 
     public static void doGenerator(String inputPath, String outputPath,Object model) throws IOException, TemplateException {
         // new 出 Configuration 对象，参数为版本号
@@ -43,8 +28,13 @@ public class DynamicGenerator {
         String templateName = new File(inputPath).getName();
         Template template = configuration.getTemplate(templateName);
 
-        Writer out = new FileWriter(outputPath);
+        // 如果文件不存在，则创建目录
+        if(!FileUtil.exist(outputPath)){
+            FileUtil. touch(outputPath);
+        }
 
+        // 生成
+        Writer out = new FileWriter(outputPath);
         template. process(model,out);
 
         // 生成文件后关闭
