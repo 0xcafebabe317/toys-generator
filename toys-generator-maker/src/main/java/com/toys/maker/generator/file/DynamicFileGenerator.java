@@ -1,4 +1,4 @@
-package com.toys.generator;
+package com.toys.maker.generator.file;
 
 import cn.hutool.core.io.FileUtil;
 import freemarker.template.Configuration;
@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-public class DynamicGenerator {
+public class DynamicFileGenerator {
 
     public static void doGenerator(String inputPath, String outputPath,Object model) throws IOException, TemplateException {
         // new 出 Configuration 对象，参数为版本号

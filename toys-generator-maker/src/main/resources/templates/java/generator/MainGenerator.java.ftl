@@ -19,11 +19,11 @@ public class MainGenerator {
 
 <#list fileConfig.files as fileInfo>
         inputPath = new File(inputRootPath,"${fileInfo.inputPath}").getAbsolutePath();
-        outputPath = new File(outputRootPath,${fileInfo.outputPath}).getAbsolutePath();
+        outputPath = new File(outputRootPath,"${fileInfo.outputPath}").getAbsolutePath();
     <#if fileInfo.generateType == "static">
         StaticGenerator.copyFilesByHutool(inputPath,outputPath);
     <#else>
-        DynamicGenerator.doGenerator(inputPath,outputPath,model); 
+        DynamicGenerator.doGenerator(inputPath,outputPath,model);
     </#if>
 
 </#list>

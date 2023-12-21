@@ -1,4 +1,4 @@
-package com.toys.maker.cli.command;
+package com.toys.cli.command;
 
 import cn.hutool.core.io.FileUtil;
 import picocli.CommandLine.Command;
@@ -6,7 +6,7 @@ import picocli.CommandLine.Command;
 import java.io.File;
 import java.util.List;
 
-@Command(name = "list", description = "查看文件列表", "mixinStandardHelpOptions = true)
+@Command(name = "list", description = "查看文件列表", mixinStandardHelpOptions = true)
 public class ListCommand implements Runnable {
 
     @Override

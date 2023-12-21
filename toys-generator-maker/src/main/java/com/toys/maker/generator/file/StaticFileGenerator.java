@@ -1,8 +1,8 @@
-package com.toys.generator;
+package com.toys.maker.generator.file;
 
 import cn.hutool.core.io.FileUtil;
 
-public class StaticGenerator {
+public class StaticFileGenerator {
     /**
      * 拷贝文件 (Hutool 实现，会将输入目录完整拷贝到输出目录下)
      * @param inputPath 输入路径
