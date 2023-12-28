@@ -10,6 +10,7 @@ import com.toys.maker.meta.enums.ModelTypeEnum;
 
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: Toys
@@ -37,6 +38,17 @@ public class MetaValidator {
             return;
         }
         for (Meta.ModelConfig.ModelInfo modelInfo : modelInfoList) {
+            // 为group 不校验
+            String groupKey = modelInfo.getGroupKey();
+            if(StrUtil.isNotEmpty(groupKey)){
+                // 生成中间参数
+                List<Meta.ModelConfig.ModelInfo> subModelInfoList = modelInfo.getModels();
+                String allArgsStr = subModelInfoList.stream()
+                        .map(subModelInfo -> String.format("\"--%s\"", subModelInfo.getFieldName()))
+                        .collect(Collectors.joining(", "));
+                modelInfo.setAllArgsStr(allArgsStr);
+                continue;
+            }
             // fieldName 字段名称 必填
             String fieldName = modelInfo.getFieldName();
             if (StrUtil.isBlank(fieldName)) {
@@ -86,6 +98,11 @@ public class MetaValidator {
             return;
         }
         for (Meta.FileConfig.FileInfo fileInfo : fileInfoList) {
+            String type = fileInfo.getType();
+            if (FileTypeEnum.GROUP.getValue().equals(type)){
+                // todo 校验文件组的名字等
+                continue;
+            }
             // inputPath 必填
             String inputPath = fileInfo.getInputPath();
             if (StrUtil.isBlank(inputPath)) {
@@ -99,7 +116,6 @@ public class MetaValidator {
             }
 
             // type : 默认 inputPath 有文件后缀，比如 .java 默认为file，否则就是 dir
-            String type = fileInfo.getType();
             if (StrUtil.isBlank(type)) {
                 // 无文件后缀
                 if (StrUtil.isBlank(FileUtil.getSuffix(inputPath))) {
